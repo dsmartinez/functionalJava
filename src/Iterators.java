@@ -21,10 +21,19 @@ public class Iterators {
         }
     }
 
-    public static<E> Collection<E> filter(FilterStrategy< E> strategy, Collection<E> c){
-        //TODO implement this
-        return null;
+    public static<E> Collection<E> filter(FilterStrategy<E> strategy, Collection<E> c){
+       try {
+           Collection<E> accepted = c.getClass().newInstance();
+           for (E element : c)
+               if (strategy.accept(element)) {
+                   accepted.add(element);
+               }
+           return accepted;
+       }catch(Exception e){
+           System.out.println(e);
+           return null;
+       }
     }
 
-    //public static
+
 }
